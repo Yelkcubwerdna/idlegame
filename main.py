@@ -7,6 +7,7 @@ def main():
     coins = 0
     enter = 1
     snails = 0
+    crows = 0
     last_time = time.time()
     time_passed = 0
 
@@ -21,7 +22,13 @@ def main():
         Upgrade("Snails+2", "Hire more snails to press enter for you", 421875, "snails"),
         Upgrade("Snails+3", "Hire more snails to press enter for you", 31640625, "snails"),
         Upgrade("Snails+4", "Hire more snails to press enter for you", 2373046875, "snails"),
-        Upgrade("Snails+5", "Hire more snails to press enter for you", 177978515625, "snails")
+        Upgrade("Snails+5", "Hire more snails to press enter for you", 177978515625, "snails"),
+        Upgrade("Crows", "Hire crows to press enter for you", 113, "crows"),
+        Upgrade("Crows+1", "Hire more crows to press enter for you", 12656, "crows"),
+        Upgrade("Crows+2", "Hire more crows to press enter for you", 1423828, "crows"),
+        Upgrade("Crows+3", "Hire more crows to press enter for you", 160180664, "crows"),
+        Upgrade("Crows+4", "Hire more crows to press enter for you", 1.8020325e10, "crows"),
+        Upgrade("Crows+5", "Hire more crows to press enter for you", 2.02728653e12, "crows")
     ]
     
     input("Press enter to get coins!")
@@ -29,7 +36,7 @@ def main():
     while(True):
         print('\n\n\n\n\n\n')
         before = coins
-        coins+=enter + math.floor(time_passed*snails)
+        coins+=enter + math.floor(time_passed*snails) + math.floor(time_passed*crows)
         available = []
 
         print('Available Upgrades\n===============')
@@ -45,11 +52,15 @@ def main():
         print(f'\nBefore = {before}\nEnter = +{enter}')
         if snails > 0:
             print(f'Snails = +{math.floor(snails * time_passed)} ({snails} * {math.floor(time_passed)} seconds)')
+        if crows > 0:
+            print(f'Crows = +{math.floor(crows * time_passed)} ({crows} * {math.floor(time_passed)} seconds)')
         print(f'==========\nCoins: {math.floor(coins)}')
 
         inp = input()
+        # TODO: Create a time passed variable for each upgrade
         time_passed = time.time() - last_time
-        last_time = time.time()
+        if time_passed >= 1:
+            last_time = time.time()
         
         if (inp != ""):
             # Adjust to account for 0 element
@@ -69,6 +80,8 @@ def main():
                         enter += 1
                     case "snails":
                         snails += 0.1
+                    case "crows":
+                        crows += 0.5
             except:
                 print("Input does not match an available option")
 
