@@ -10,6 +10,8 @@ def main():
     crows = 0
     last_time = time.time()
     time_passed = 0
+    time_passed_snails = 0
+    time_passed_crows = 0
 
     upgrades = [
         Upgrade("Enter+1", "Increases coins gained from pressing Enter", 50, "enter"),
@@ -51,16 +53,29 @@ def main():
 
         print(f'\nBefore = {before}\nEnter = +{enter}')
         if snails > 0:
-            print(f'Snails = +{math.floor(snails * time_passed)} ({snails} * {math.floor(time_passed)} seconds)')
+            coins_gained_snails = math.floor(snails * time_passed_snails)
+            time_spent_snails = 0
+            if (coins_gained_snails > 0):
+                time_spent_snails = coins_gained_snails / snails
+                time_passed_snails -= time_spent_snails
+            print(f'Snails = +{math.floor(coins_gained_snails)} ({snails} * {math.floor(time_spent_snails)} seconds)')
         if crows > 0:
-            print(f'Crows = +{math.floor(crows * time_passed)} ({crows} * {math.floor(time_passed)} seconds)')
+            coins_gained_crows = math.floor(crows * time_passed_crows)
+            time_spent_crows = 0
+            if (coins_gained_crows) > 0:
+                time_spent_crows = coins_gained_crows / crows
+                time_passed_crows -= time_spent_crows
+            print(f'Crows = +{math.floor(coins_gained_crows)} ({crows} * {math.floor(time_spent_crows)} seconds)')
         print(f'==========\nCoins: {math.floor(coins)}')
 
         inp = input()
-        # TODO: Create a time passed variable for each upgrade
+        
         time_passed = time.time() - last_time
-        if time_passed >= 1:
-            last_time = time.time()
+        last_time = time.time()
+        if snails > 0:
+            time_passed_snails += time_passed
+        if crows > 0:
+            time_passed_crows += time_passed
         
         if (inp != ""):
             # Adjust to account for 0 element
