@@ -8,10 +8,12 @@ def main():
     enter = 1
     snails = 0
     crows = 0
+    monkeys = 0
     last_time = time.time()
     time_passed = 0
     time_passed_snails = 0
     time_passed_crows = 0
+    time_passed_monkeys = 0
 
     upgrades = [
         Upgrade("Enter+1", "Increases coins gained from pressing Enter", 50, "enter"),
@@ -30,7 +32,13 @@ def main():
         Upgrade("Crows+2", "Hire more crows to press enter for you", 1423828, "crows"),
         Upgrade("Crows+3", "Hire more crows to press enter for you", 160180664, "crows"),
         Upgrade("Crows+4", "Hire more crows to press enter for you", 1.8020325e10, "crows"),
-        Upgrade("Crows+5", "Hire more crows to press enter for you", 2.02728653e12, "crows")
+        Upgrade("Crows+5", "Hire more crows to press enter for you", 2.02728653e12, "crows"),
+        Upgrade("Monkeys", "Hire monkeys to press enter for you", 170, "monkeys"),
+        Upgrade("Monkeys+1", "Hire more monkeys to press enter for you", 28730, "monkeys"),
+        Upgrade("Monkeys+2", "Hire more monkeys to press enter for you", 4869777, "monkeys"),
+        Upgrade("Monkeys+3", "Hire more monkeys to press enter for you", 825427265, "monkeys"),
+        Upgrade("Monkeys+4", "Hire more monkeys to press enter for you", 1.39909921e11, "monekys"),
+        Upgrade("Monkeys+5", "Hire more monkeys to press enter for you", 2.3714731682e13, "monkeys"),
     ]
     
     input("Press enter to get coins!")
@@ -38,7 +46,7 @@ def main():
     while(True):
         print('\n\n\n\n\n\n')
         before = coins
-        coins+=enter + math.floor(time_passed*snails) + math.floor(time_passed*crows)
+        coins+=enter + math.floor(time_passed*snails) + math.floor(time_passed*crows) + math.floor(time_passed*monkeys)
         available = []
 
         print('Available Upgrades\n===============')
@@ -66,6 +74,13 @@ def main():
                 time_spent_crows = coins_gained_crows / crows
                 time_passed_crows -= time_spent_crows
             print(f'Crows = +{math.floor(coins_gained_crows)} ({crows} * {math.floor(time_spent_crows)} seconds)')
+        if monkeys > 0:
+            coins_gained_monkeys = math.floor(monkeys * time_passed_monkeys)
+            time_spent_monkeys = 0
+            if (coins_gained_monkeys > 0):
+                time_spent_monkeys = coins_gained_monkeys / monkeys
+                time_passed_monkeys -= time_spent_monkeys
+            print(f'Monkeys = +{math.floor(coins_gained_monkeys)} ({monkeys} * {math.floor(time_spent_monkeys)} seconds)')
         print(f'==========\nCoins: {math.floor(coins)}')
 
         inp = input()
@@ -76,6 +91,8 @@ def main():
             time_passed_snails += time_passed
         if crows > 0:
             time_passed_crows += time_passed
+        if monkeys > 0:
+            time_passed_monkeys += time_passed
         
         if (inp != ""):
             # Adjust to account for 0 element
@@ -97,6 +114,8 @@ def main():
                         snails += 0.1
                     case "crows":
                         crows += 0.5
+                    case "monkeys":
+                        monkeys += 1
             except:
                 print("Input does not match an available option")
 
