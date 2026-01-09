@@ -39,6 +39,12 @@ def main():
         Upgrade("Monkeys+3", "Hire more monkeys to press enter for you", 825427265, "monkeys"),
         Upgrade("Monkeys+4", "Hire more monkeys to press enter for you", 1.39909921e11, "monekys"),
         Upgrade("Monkeys+5", "Hire more monkeys to press enter for you", 2.3714731682e13, "monkeys"),
+        Upgrade("Enter Doubler", "Doubles gain for each enter press", 255, "double"),
+        Upgrade("Enter Doubler", "Doubles gain for each enter press", 65025, "double"),
+        Upgrade("Enter Doulber", "Doubles gain for each enter press", 16581375, "double"),
+        Upgrade("Enter Doubler", "Doulbes gain for each enter press", 4.228251e9, "double"),
+        Upgrade("Enter Doubler", "Doubles gain for each enter press", 1.078203909e12, "double"),
+        Upgrade("Enter Doubler", "Doubles gain for each enter press", 2.74941996891e14, "double")
     ]
     
     input("Press enter to get coins!")
@@ -116,6 +122,11 @@ def main():
                         crows += 0.5
                     case "monkeys":
                         monkeys += 1
+                    case "double":
+                        enter *= 2
+                        snails *= 2
+                        crows *= 2
+                        monkeys *= 2
             except:
                 print("Input does not match an available option")
 
